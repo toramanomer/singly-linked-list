@@ -10,7 +10,11 @@
 	"scripts": {
 		"test": "vitest"
 	},
-	"keywords": [],
+	"keywords": [
+		"singly linked list",
+		"linked list",
+		"data structure"
+	],
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
