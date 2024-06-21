@@ -1,20 +1,5 @@
-export class NoSuchElementException extends Error {
-	constructor(message: string) {
-		super(message)
-		this.name = 'NoSuchElementException'
-
-		Object.setPrototypeOf(this, NoSuchElementException.prototype)
-	}
-}
-
-export class IndexOutOfBoundsException extends Error {
-	constructor(message: string) {
-		super(message)
-		this.name = 'IndexOutOfBoundsException'
-
-		Object.setPrototypeOf(this, IndexOutOfBoundsException.prototype)
-	}
-}
+import { IndexOutOfBoundsException } from './exceptions/IndexOutOfBoundsException'
+import { NoSuchElementException } from './exceptions/NoSuchElementException'
 
 class SinglyLinkedListNode<T> {
 	constructor(
@@ -261,4 +246,3 @@ export class SinglyLinkedList<T> {
 		return result
 	}
 }
-

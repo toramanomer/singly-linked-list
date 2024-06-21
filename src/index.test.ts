@@ -1,5 +1,7 @@
 import { describe, it, expect, vi } from 'vitest'
-import { IndexOutOfBoundsException, NoSuchElementException, SinglyLinkedList } from './index'
+import { SinglyLinkedList } from './index'
+import { IndexOutOfBoundsException } from './exceptions/IndexOutOfBoundsException'
+import { NoSuchElementException } from './exceptions/NoSuchElementException'
 
 describe('SinglyLinkedList', () => {
 	describe('constructor', () => {
