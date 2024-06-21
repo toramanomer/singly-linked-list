@@ -15,7 +15,7 @@
 		"linked list",
 		"data structure"
 	],
-	"author": "",
+	"author": "Ömer Toraman",
 	"license": "ISC",
 	"devDependencies": {
 		"typescript": "^5.5.2",
