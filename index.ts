@@ -166,6 +166,22 @@ export class SinglyLinkedList<T> {
 		return head.data
 	}
 
+	public removeLast(): T {
+		const tail = this.tail
+		if (!tail) throw new Error('List is empty')
+		
+		const newTail = this.nodeAt(this.size - 2)
+		if (newTail) {
+			newTail.next = null
+			this.tail = newTail
+		} else {
+			this.head = null
+			this.tail = null
+		}
+		this.size--
+		return tail.data
+	}
+
 	/**
 	 * @description Removes all of the elements from this list
 	 * @returns {this} list
