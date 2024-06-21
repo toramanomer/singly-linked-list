@@ -151,6 +151,21 @@ export class SinglyLinkedList<T> {
 		return this
 	}
 
+	//////////////////////////////////////////////////////////////////////////////////////
+	// * REMOVAL
+	//////////////////////////////////////////////////////////////////////////////////////
+	public removeFirst(): T {
+		const head = this.head
+		if (!head) throw new Error('List is empty')
+
+		const next = head.next
+		this.head = next
+		if (!next) this.tail = null
+		this.size--
+
+		return head.data
+	}
+
 	/**
 	 * @description Removes all of the elements from this list
 	 * @returns {this} list

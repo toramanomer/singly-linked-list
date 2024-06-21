@@ -36,27 +36,73 @@ describe('SinglyLinkedList', () => {
 		})
 	})
 
-	describe('clear', () => {
-		it('should remove all elements from the list when there are elements', () => {
-			const list = new SinglyLinkedList<number>([1, 2, 3])
+	//////////////////////////////////////////////////////////////////////////////////////
+	// * REMOVAL
+	//////////////////////////////////////////////////////////////////////////////////////
+	describe('removal', () => {
+		describe('clear', () => {
+			it('should remove all elements from the list when there are elements', () => {
+				const list = new SinglyLinkedList<number>([1, 2, 3])
 
-			list.clear()
+				list.clear()
 
-			expect(list.getSize()).toBe(0)
-			expect(list.peekFirst()).toBe(null)
-			expect(list.peekLast()).toBe(null)
+				expect(list.getSize()).toBe(0)
+				expect(list.peekFirst()).toBe(null)
+				expect(list.peekLast()).toBe(null)
+			})
+
+			it('should not throw when there are no elements', () => {
+				const list = new SinglyLinkedList<number>()
+
+				expect(() => list.clear()).not.toThrow()
+				expect(list.getSize()).toBe(0)
+				expect(list.peekFirst()).toBe(null)
+				expect(list.peekLast()).toBe(null)
+			})
 		})
 
-		it('should not throw when there are no elements', () => {
-			const list = new SinglyLinkedList<number>()
+		describe('removeFirst', () => {
+			it('should throw when there are no elements', () => {
+				const list = new SinglyLinkedList()
+				expect(() => list.removeFirst()).toThrowError()
+			})
 
-			expect(() => list.clear()).not.toThrow()
-			expect(list.getSize()).toBe(0)
-			expect(list.peekFirst()).toBe(null)
-			expect(list.peekLast()).toBe(null)
+			it('should return the removed element', () => {
+				const list = new SinglyLinkedList<number>([1, 2, 3])
+
+				expect(list.removeFirst()).toBe(1)
+			})
+
+			it('should decrement the size', () => {
+				const list = new SinglyLinkedList<number>([1, 2, 3])
+
+				list.removeFirst()
+
+				expect(list.getSize()).toBe(2)
+			})
+
+			it('should remove the first element and set tail as null when there is only one element', () => {
+				const list = new SinglyLinkedList<number>([1])
+
+				expect(list.removeFirst()).toBe(1)
+				expect(list.getSize()).toBe(0)
+
+				expect(list.peekFirst()).toBe(null)
+				expect(list.peekLast()).toBe(null)
+			})
+
+			it('should remove the first element and set the next element as head', () => {
+				const list = new SinglyLinkedList<number>([1, 2, 3])
+
+				list.removeFirst()
+
+				expect(list.getSize()).toBe(2)
+				expect(list.peekFirst()).toBe(2)
+				expect(list.peekLast()).toBe(3)
+			})
 		})
 	})
-	
+
 	//////////////////////////////////////////////////////////////////////////////////////
 	// * RETRIEVAL
 	//////////////////////////////////////////////////////////////////////////////////////
