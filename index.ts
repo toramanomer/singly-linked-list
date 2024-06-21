@@ -154,6 +154,11 @@ export class SinglyLinkedList<T> {
 	//////////////////////////////////////////////////////////////////////////////////////
 	// * REMOVAL
 	//////////////////////////////////////////////////////////////////////////////////////
+	/**
+	 * @description Removes and returns the first element from this list.
+	 * Sets the head to the next node. In case the next node is the tail, the new head becomes the tail.
+	 * @throws {Error} if the list is empty
+	 */
 	public removeFirst(): T {
 		const head = this.head
 		if (!head) throw new Error('List is empty')
@@ -166,6 +171,11 @@ export class SinglyLinkedList<T> {
 		return head.data
 	}
 
+	/**
+	 * @description Removes and returns the last element from this list.
+	 * Sets the tail to the previous node. In case the previous node is the head, the new tail becomes the head.
+	 * @throws {Error} if the list is empty
+	 */
 	public removeLast(): T {
 		const tail = this.tail
 		if (!tail) throw new Error('List is empty')
@@ -180,6 +190,24 @@ export class SinglyLinkedList<T> {
 		}
 		this.size--
 		return tail.data
+	}
+
+	/**
+	 * @description Removes the element at the specified position in this list
+	 * by shifting any subsequent elements to the left.
+	 * @param index the index of the element to be removed
+	 * @throws {Error} if the index is out of bounds
+	 */
+	public removeAt(index: number): T {
+		if (index < 0 || index >= this.size) throw new Error('Index out of bounds')
+		if (index === 0) return this.removeFirst()
+		if (index === this.size - 1) return this.removeLast()
+
+		const predecessor = this.nodeAt(index - 1)
+		const node = predecessor!.next
+		predecessor!.next = node!.next
+		this.size--
+		return node!.data
 	}
 
 	/**

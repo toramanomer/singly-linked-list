@@ -161,6 +161,47 @@ describe('SinglyLinkedList', () => {
 				expect(list.peekLast()).toBe(1)
 			})
 		})
+
+		describe('removeAt', () => {
+			it('should throw when the index is less than zero', () => {
+				const list = new SinglyLinkedList<number>([1, 2, 3])
+
+				expect(() => list.removeAt(-1)).toThrowError()
+			})
+
+			it('should throw when the index is more than the size of the list', () => {
+				const list = new SinglyLinkedList<number>([1, 2, 3])
+
+				expect(() => list.removeAt(3)).toThrowError()
+			})
+
+			it('should remove the first element when the index is zero', () => {
+				const list = new SinglyLinkedList<number>([1, 2, 3])
+
+				expect(list.removeAt(0)).toBe(1)
+				expect(list.getSize()).toBe(2)
+				expect(list.peekFirst()).toBe(2)
+				expect(list.peekLast()).toBe(3)
+			})
+
+			it('should remove the last element when the index is equal to the size', () => {
+				const list = new SinglyLinkedList<number>([1, 2, 3])
+
+				expect(list.removeAt(2)).toBe(3)
+				expect(list.getSize()).toBe(2)
+				expect(list.peekFirst()).toBe(1)
+				expect(list.peekLast()).toBe(2)
+			})
+
+			it('should remove the element at the index and set the next element as the next of the predecessor', () => {
+				const list = new SinglyLinkedList<number>([1, 2, 3])
+
+				expect(list.removeAt(1)).toBe(2)
+				expect(list.getSize()).toBe(2)
+				expect(list.peekFirst()).toBe(1)
+				expect(list.peekLast()).toBe(3)
+			})
+		})
 	})
 
 	//////////////////////////////////////////////////////////////////////////////////////
