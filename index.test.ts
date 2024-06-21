@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from 'vitest'
-import { SinglyLinkedList } from './index'
+import { IndexOutOfBoundsException, NoSuchElementException, SinglyLinkedList } from './index'
 
 describe('SinglyLinkedList', () => {
 	describe('constructor', () => {
@@ -64,7 +64,7 @@ describe('SinglyLinkedList', () => {
 		describe('removeFirst', () => {
 			it('should throw when there are no elements', () => {
 				const list = new SinglyLinkedList()
-				expect(() => list.removeFirst()).toThrowError()
+				expect(() => list.removeFirst()).toThrowError(NoSuchElementException)
 			})
 
 			it('should return the removed element', () => {
@@ -115,7 +115,7 @@ describe('SinglyLinkedList', () => {
 		describe('removeLast', () => {
 			it('should throw when there are no elements', () => {
 				const list = new SinglyLinkedList()
-				expect(() => list.removeLast()).toThrowError()
+				expect(() => list.removeLast()).toThrowError(NoSuchElementException)
 			})
 
 			it('it should return the removed element', () => {
@@ -166,13 +166,13 @@ describe('SinglyLinkedList', () => {
 			it('should throw when the index is less than zero', () => {
 				const list = new SinglyLinkedList<number>([1, 2, 3])
 
-				expect(() => list.removeAt(-1)).toThrowError()
+				expect(() => list.removeAt(-1)).toThrowError(IndexOutOfBoundsException)
 			})
 
 			it('should throw when the index is more than the size of the list', () => {
 				const list = new SinglyLinkedList<number>([1, 2, 3])
 
-				expect(() => list.removeAt(3)).toThrowError()
+				expect(() => list.removeAt(3)).toThrowError(IndexOutOfBoundsException)
 			})
 
 			it('should remove the first element when the index is zero', () => {
@@ -337,7 +337,7 @@ describe('SinglyLinkedList', () => {
 			it('should throw when index is more than the list size and not modify the list', () => {
 				const list = new SinglyLinkedList<number>([])
 
-				expect(() => list.addAll(1, [1, 2, 3])).toThrowError()
+				expect(() => list.addAll(1, [1, 2, 3])).toThrowError(IndexOutOfBoundsException)
 				expect(list.getSize()).toBe(0)
 				expect(list.peekFirst()).toBe(null)
 				expect(list.peekLast()).toBe(null)
@@ -346,7 +346,7 @@ describe('SinglyLinkedList', () => {
 			it('should throw when index is less than the zero and not modify the list', () => {
 				const list = new SinglyLinkedList<number>([4, 5])
 
-				expect(() => list.addAll(-1, [1, 2, 3])).toThrowError()
+				expect(() => list.addAll(-1, [1, 2, 3])).toThrowError(IndexOutOfBoundsException)
 				expect(list.getSize()).toBe(2)
 				expect(list.peekFirst()).toBe(4)
 				expect(list.peekLast()).toBe(5)
@@ -387,7 +387,7 @@ describe('SinglyLinkedList', () => {
 			it('should throw when index is more than the list size and not modify the list', () => {
 				const list = new SinglyLinkedList<number>([])
 
-				expect(() => list.addAt(1, 1)).toThrowError()
+				expect(() => list.addAt(1, 1)).toThrowError(IndexOutOfBoundsException)
 				expect(list.getSize()).toBe(0)
 				expect(list.peekFirst()).toBe(null)
 				expect(list.peekLast()).toBe(null)
@@ -396,7 +396,7 @@ describe('SinglyLinkedList', () => {
 			it('should throw when index is less than the zero and not modify the list', () => {
 				const list = new SinglyLinkedList<number>([1, 2])
 
-				expect(() => list.addAt(-1, 0)).toThrowError()
+				expect(() => list.addAt(-1, 0)).toThrowError(IndexOutOfBoundsException)
 				expect(list.getSize()).toBe(2)
 				expect(list.peekFirst()).toBe(1)
 				expect(list.peekLast()).toBe(2)

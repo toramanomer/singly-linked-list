@@ -1,3 +1,21 @@
+export class NoSuchElementException extends Error {
+	constructor(message: string) {
+		super(message)
+		this.name = 'NoSuchElementException'
+
+		Object.setPrototypeOf(this, NoSuchElementException.prototype)
+	}
+}
+
+export class IndexOutOfBoundsException extends Error {
+	constructor(message: string) {
+		super(message)
+		this.name = 'IndexOutOfBoundsException'
+
+		Object.setPrototypeOf(this, IndexOutOfBoundsException.prototype)
+	}
+}
+
 class SinglyLinkedListNode<T> {
 	constructor(
 		public data: T,
@@ -100,11 +118,13 @@ export class SinglyLinkedList<T> {
 	/**
 	 * @description Inserts the specified element at the specified position in this list
 	 * by shifting the element currently at that position and any subsequent elements to the right
+	 * @throws {IndexOutOfBoundsException} if the index is less than 0 or greater than the size of the list
 	 * @param index index at which the specified element is to be inserted
 	 * @param data element to be inserted
 	 */
 	public addAt(index: number, data: T) {
-		if (index < 0 || index > this.size) throw new Error('Index out of bounds')
+		if (index < 0 || index > this.size)
+			throw new IndexOutOfBoundsException(`Index ${index} is out of bounds for size ${this.size}`)
 		if (index === 0) return this.addFirst(data)
 		if (index === this.size) return this.addLast(data)
 
@@ -114,8 +134,15 @@ export class SinglyLinkedList<T> {
 		return this
 	}
 
+	/**
+	 * @throws {IndexOutOfBoundsException} if the index is less than 0 or greater than the size of the list
+	 * @param index 
+	 * @param collection 
+	 * @returns 
+	 */
 	public addAll(index: number, collection: T[]): this {
-		if (index < 0 || index > this.size) throw new Error('Index out of bounds')
+		if (index < 0 || index > this.size)
+			throw new IndexOutOfBoundsException(`Index ${index} is out of bounds for size ${this.size}`)
 		if (!collection.length) return this
 
 		let predecessor: SinglyLinkedListNode<T> | null = null
@@ -161,7 +188,8 @@ export class SinglyLinkedList<T> {
 	 */
 	public removeFirst(): T {
 		const head = this.head
-		if (!head) throw new Error('List is empty')
+		if (!head)
+			throw new NoSuchElementException('Head is null.')
 
 		const next = head.next
 		this.head = next
@@ -178,7 +206,8 @@ export class SinglyLinkedList<T> {
 	 */
 	public removeLast(): T {
 		const tail = this.tail
-		if (!tail) throw new Error('List is empty')
+		if (!tail)
+			throw new NoSuchElementException('Tail is null.')
 		
 		const newTail = this.nodeAt(this.size - 2)
 		if (newTail) {
@@ -199,7 +228,8 @@ export class SinglyLinkedList<T> {
 	 * @throws {Error} if the index is out of bounds
 	 */
 	public removeAt(index: number): T {
-		if (index < 0 || index >= this.size) throw new Error('Index out of bounds')
+		if (index < 0 || index >= this.size)
+			throw new IndexOutOfBoundsException(`Index ${index} is out of bounds for size ${this.size}`)
 		if (index === 0) return this.removeFirst()
 		if (index === this.size - 1) return this.removeLast()
 
@@ -231,5 +261,4 @@ export class SinglyLinkedList<T> {
 		return result
 	}
 }
-
 
